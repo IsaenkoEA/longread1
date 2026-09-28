@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Почему занятие устроено именно так — Модуль 2</title>
+<style>
+  * { box-sizing: border-box; }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #f4f6fb;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1a202c;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  .longread {
+    --c-text: #1a202c;
+    --c-accent-1: #1e3a8a;
+    --c-accent-2: #3730a3;
+    --c-accent-3: #7b1fa2;
+    --c-accent-4: #1a56db;
+    --c-accent-5: #00838f;
+    --c-accent-6: #b45309;
+    --c-accent-7: #16a34a;
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--c-text);
+  }
+
+  .longread p { margin: 0 0 22px 0; font-size: 19px; line-height: 1.75; }
+  .longread h1 { font-size: 42px; line-height: 1.2; font-weight: 800; margin: 0 0 24px 0; letter-spacing: -0.02em; }
+  .longread h2 { font-size: 32px; line-height: 1.25; font-weight: 800; margin: 0 0 24px 0; letter-spacing: -0.01em; }
+  .longread strong { font-weight: 700; }
+
+  .lr-hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+    border-radius: 20px;
+    padding: 52px 44px 44px;
+    color: #fff;
+    margin-bottom: 36px;
+  }
+  .lr-hero__tag {
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin: 0 0 22px 0;
+    color: rgba(255,255,255,0.7);
+    font-weight: 600;
+  }
+  .lr-hero h1 { color: #fff; font-size: 42px; margin-bottom: 22px; }
+  .lr-hero__lead { font-size: 21px; line-height: 1.55; color: rgba(255,255,255,0.92); margin-bottom: 26px; }
+  .lr-hero__meta {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 20px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.72);
+    margin: 0;
+  }
+
+  .lr-nav {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 40px;
+    border-left: 5px solid #64748b;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  }
+  .lr-nav__label {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #64748b;
+    font-weight: 700;
+    margin: 0 0 14px 0;
+  }
+  .lr-nav ol { margin: 0; padding-left: 22px; }
+  .lr-nav li { font-size: 16px; line-height: 1.7; margin-bottom: 6px; color: #334155; }
+
+  .lr-scene {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin: 0 0 44px 0;
+    border-left: 5px solid #94a3b8;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  }
+  .lr-scene p { margin-bottom: 18px; font-size: 19px; color: #334155; }
+  .lr-scene p:last-child { margin-bottom: 0; }
+
+  .lr-part { margin: 0 0 48px 0; }
+  .lr-part-tag {
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 14px 0;
+  }
+  .lr-part--1 .lr-part-tag { color: var(--c-accent-3); }
+  .lr-part--2 .lr-part-tag { color: var(--c-accent-4); }
+  .lr-part--3 .lr-part-tag { color: var(--c-accent-5); }
+  .lr-part--4 .lr-part-tag { color: var(--c-accent-6); }
+  .lr-part--synth .lr-part-tag { color: var(--c-accent-3); }
+  .lr-part--apply .lr-part-tag { color: var(--c-accent-7); }
+
+  .lr-card {
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 0 0 28px 0;
+  }
+  .lr-card--purple { background: #faf5ff; border-left: 5px solid var(--c-accent-3); }
+  .lr-card--blue { background: #eff6ff; border-left: 5px solid var(--c-accent-4); }
+  .lr-card--cyan { background: #ecfeff; border-left: 5px solid var(--c-accent-5); }
+  .lr-card--amber { background: #fffbeb; border-left: 5px solid var(--c-accent-6); }
+  .lr-card--green { background: #f0fdf4; border-left: 5px solid var(--c-accent-7); }
+  .lr-card--red { background: #fef2f2; border-left: 5px solid #dc2626; }
+  .lr-card--slate { background: #f1f5f9; border-left: 5px solid #64748b; }
+  .lr-card--white { background: #fff; border: 2px solid #e2e8f0; }
+
+  .lr-card__label {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+  }
+  .lr-card__label--purple { color: var(--c-accent-3); }
+  .lr-card__label--blue { color: var(--c-accent-4); }
+  .lr-card__label--cyan { color: var(--c-accent-5); }
+  .lr-card__label--amber { color: var(--c-accent-6); }
+  .lr-card__label--green { color: var(--c-accent-7); }
+  .lr-card__label--red { color: #dc2626; }
+
+  .lr-step { margin-bottom: 14px; font-size: 18px; line-height: 1.75; }
+  .lr-step:last-child { margin-bottom: 0; }
+  .lr-step strong { color: var(--c-accent-3); }
+  .lr-step--blue strong { color: var(--c-accent-4); }
+  .lr-step--cyan strong { color: var(--c-accent-5); }
+  .lr-step--amber strong { color: var(--c-accent-6); }
+  .lr-step--green strong { color: var(--c-accent-7); }
+
+  .lr-quote {
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--c-text);
+    border-left: 4px solid #93c5fd;
+    padding: 4px 0 4px 22px;
+    margin: 0;
+  }
+
+  .lr-checklist { margin: 0; padding-left: 0; list-style: none; counter-reset: lr-count; }
+  .lr-checklist li {
+    counter-increment: lr-count;
+    position: relative;
+    padding-left: 44px;
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 1.8;
+  }
+  .lr-checklist li:last-child { margin-bottom: 0; }
+  .lr-checklist li::before {
+    content: counter(lr-count);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--c-accent-7);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .lr-final {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+    border-radius: 20px;
+    padding: 44px 40px;
+    color: #fff;
+    margin-bottom: 36px;
+  }
+  .lr-final h2 { color: #fff; font-size: 30px; margin-bottom: 20px; }
+  .lr-final p { color: rgba(255,255,255,0.95); font-size: 19px; line-height: 1.7; margin: 0 0 18px 0; }
+  .lr-final p:last-child { margin-bottom: 0; }
+  .lr-final strong { color: #fff; }
+
+  .lr-sources {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-bottom: 36px;
+    border-left: 5px solid #64748b;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  }
+  .lr-sources__label {
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #475569;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+  }
+  .lr-sources p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #475569;
+    margin: 0 0 12px 0;
+    padding-left: 22px;
+    text-indent: -22px;
+  }
+  .lr-sources p:last-child { margin-bottom: 0; }
+
+  @media (max-width: 640px) {
+    .page { padding: 24px 14px 48px; }
+    .longread h1, .lr-hero h1 { font-size: 28px; }
+    .longread h2 { font-size: 24px; }
+    .longread p, .lr-scene p { font-size: 17px; }
+    .lr-hero, .lr-final { padding: 32px 22px; }
+    .lr-hero__lead { font-size: 18px; }
+    .lr-card, .lr-scene, .lr-sources, .lr-nav { padding: 22px 20px; }
+    .lr-final p { font-size: 17px; }
+    .lr-checklist li { padding-left: 38px; font-size: 16px; }
+    .lr-checklist li::before { width: 26px; height: 26px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<main class="page">
+<article class="longread">
+
+  <!-- ОБЛОЖКА -->
+  <div class="lr-hero">
+    <p class="lr-hero__tag">Модуль 2 · Теоретическое обоснование</p>
+    <h1>Почему занятие устроено именно так</h1>
+    <p class="lr-hero__lead">
+      Разбираем, откуда взялась структура занятия в нашем курсе — и почему она работает не только в теории, но и на семинаре в понедельник в 9:30.
+    </p>
+    <p class="lr-hero__meta">
+      Читайте, если хотите понять логику, а не просто следовать инструкции. Время чтения — 15–18 минут.
+    </p>
+  </div>
+
+  <!-- НАВИГАЦИЯ -->
+  <div class="lr-nav">
+    <p class="lr-nav__label">Что в этом тексте</p>
+    <ol>
+      <li>Сцена, с которой всё начинается</li>
+      <li>Дэвид Колб и то, как взрослые на самом деле учатся</li>
+      <li>Джон Биггс и правило, которое спасает от хаоса</li>
+      <li>Джон Свеллер и причина, по которой лекции на два часа не работают</li>
+      <li>Ричард Майер и то, как делать слайды, которые не мешают</li>
+      <li>Что получается, когда четыре модели работают вместе</li>
+      <li>Что делать с этим в понедельник утром</li>
+      <li>Источники</li>
+    </ol>
+  </div>
+
+  <!-- ВВЕДЕНИЕ -->
+  <div class="lr-scene">
+    <p>Представьте: вторник, 19:40. Вы только что вернулись с основной работы, где провели шесть встреч и разобрали два инцидента. Завтра — семинар в Вышке. У вас есть тема, есть слайды, есть список литературы. Что дальше?</p>
+    <p>Большинство преподавателей-практиков в этой точке делают одно и то же: открывают презентацию и начинают дописывать слайды. Это логично — вы привыкли объяснять. Вы эксперт. Вы знаете, что рассказать.</p>
+    <p>Но студенты учатся не тогда, когда вы рассказываете. Они учатся тогда, когда <strong>делают</strong>. И если вы ведёте занятие по логике «сначала теория, потом практика, если останется время», это время почти никогда не остаётся.</p>
+    <p>Мы предлагаем другой путь. Он опирается на четыре проверенные педагогические модели. В этой статье мы разберём их по-человечески: без снобизма, без «абстрактной концептуализации», с примерами из реальной практики.</p>
+  </div>
+
+  <!-- ЧАСТЬ 1. КОЛБ -->
+  <section class="lr-part lr-part--1">
+    <p class="lr-part-tag">Часть первая</p>
+    <h2>Дэвид Колб и то, как взрослые на самом деле учатся</h2>
+
+    <p>В 1984 году американский психолог Дэвид Колб опубликовал книгу «Experiential Learning» — и попал в точку. Он описал обучение не как передачу знаний от преподавателя к студенту, а как цикл, в котором человек проходит четыре стадии.</p>
+
+    <div class="lr-card lr-card--purple">
+      <p class="lr-card__label lr-card__label--purple">Четыре стадии цикла Колба</p>
+      <p class="lr-step"><strong>1. Конкретный опыт.</strong> Человек сталкивается с ситуацией. Что-то происходит.</p>
+      <p class="lr-step"><strong>2. Рефлексивное наблюдение.</strong> Он оглядывается назад: что это было? почему так вышло?</p>
+      <p class="lr-step"><strong>3. Абстрактная концептуализация.</strong> Он выводит общее правило: значит, если делать так, получится вот это.</p>
+      <p class="lr-step"><strong>4. Активное экспериментирование.</strong> Он применяет правило в новой ситуации — и цикл повторяется.</p>
+    </div>
+
+    <p>Звучит красиво. Но есть проблема. Термины вроде «абстрактная концептуализация» — это язык академической статьи, а не язык человека, который завтра ведёт семинар. Исследователи это заметили: Хельга Бергштайнер и её коллеги в 2010 году показали, что прямое применение цикла Колба на практике затруднено — модель слишком сложна для операционализации [Bergsteiner, Avery & Neumann, 2010]. А Джон Фаулер в 2008 году прямо написал: «рефлексивное наблюдение» и «абстрактная концептуализация» — термины, которые не помогают преподавателю понять, что ему делать в аудитории [Fowler, 2008].</p>
+
+    <p>Поэтому мы адаптировали цикл. Сохранили его логику — она верная. Но перевели на язык простых вопросов.</p>
+
+    <div class="lr-card lr-card--white">
+      <p class="lr-card__label lr-card__label--purple">Адаптированный цикл Колба</p>
+      <p class="lr-step"><strong>Стадия 1.</strong> «Что здесь происходит и почему это сложно?» — даёте задачу или кейс.</p>
+      <p class="lr-step"><strong>Стадия 2.</strong> «Почему это работает именно так?» — обсуждаете гипотезы.</p>
+      <p class="lr-step"><strong>Стадия 3.</strong> «Вот правило, которое это объясняет» — даёте теорию.</p>
+      <p class="lr-step"><strong>Стадия 4.</strong> «Попробуйте применить это в новой задаче» — даёте практику.</p>
+    </div>
+
+    <p>Заметьте: это не пересказ цикла Колба «своими словами». Это его <strong>перевод в формат, применимый на занятии</strong>. Преподаватель-практик может посмотреть на эти четыре вопроса и спроектировать занятие. Ему не нужно помнить, что такое «абстрактная концептуализация» — он просто задаёт вопрос «вот правило, которое это объясняет».</p>
+
+    <div class="lr-card lr-card--amber">
+      <p><strong>Важно.</strong> Адаптация не значит упрощение. Логика Колба сохранена полностью: студенты проходят через опыт, рефлексию, обобщение и применение. Мы просто убрали «умные слова», которые мешают действовать.</p>
+    </div>
+
+    <p>И ещё одна деталь. Колб писал про взрослых. Его модель особенно хорошо работает в высшем образовании, потому что студенты — это люди, у которых уже есть опыт. Они не «чистые листы». Они приходят с профессиональным бэкграундом, с вопросами, со скепсисом. И цикл Колба это учитывает: сначала опыт, потом теория. Не наоборот.</p>
+  </section>
+
+  <!-- ЧАСТЬ 2. БИГГС -->
+  <section class="lr-part lr-part--2">
+    <p class="lr-part-tag">Часть вторая</p>
+    <h2>Джон Биггс и правило, которое спасает от хаоса</h2>
+
+    <p>В 1996 году австралийский педагог Джон Биггс опубликовал статью, которая изменила подход к проектированию курсов. Он ввёл понятие <strong>constructive alignment</strong> — конструктивная согласованность. Смысл простой: цели, активности и оценивание должны быть выстроены в одну логическую цепочку.</p>
+
+    <p>Звучит очевидно. Но посмотрите, что происходит на реальных занятиях. Преподаватель ставит цель «студент научится анализировать данные». На занятии читает лекцию про методы анализа. На экзамене просит воспроизвести определение. Три элемента — цель, активность, оценивание — не связаны между собой. Студенты учат одно, делают другое, а проверяют третье.</p>
+
+    <div class="lr-card lr-card--blue">
+      <p class="lr-card__label lr-card__label--blue">Как звучит принцип Биггса простыми словами</p>
+      <p class="lr-quote">
+        Если цель — «студент напишет программу», то и активность должна быть про написание кода. И проверка — тоже про код. Не про то, помнит ли студент определение цикла.
+      </p>
+    </div>
+
+    <p>Сам Биггс объясняет это так: «Хорошая обучающая система согласует методы преподавания и оценки с учебными активностями, заявленными в целях, так что все аспекты системы работают сообща в поддержку адекватного обучения студентов» [Biggs, 1996, p. 350].</p>
+
+    <p>Обратите внимание: Биггс говорит не про «правильные методы» и не про «инновационные подходы». Он говорит про <strong>согласованность</strong>. Это важное различие. Можно провести самую скучную лекцию — и она будет работать, если цели, активности и проверка совпадают. И можно устроить самое интерактивное занятие — и оно развалится, если три элемента не связаны.</p>
+
+    <div class="lr-card lr-card--red">
+      <p class="lr-card__label lr-card__label--red">Пример несогласованности</p>
+      <p>Цель: «студент сможет провести анализ конкурентной среды». Активность: лекция про виды анализа. Проверка: тест с выбором ответа. Студент может правильно ответить на тест и при этом не уметь провести анализ. Цель не достигнута, хотя формально всё «изучено».</p>
+    </div>
+
+    <p>В нашем курсе принцип Биггса работает как проверочная линейка. Когда вы проектируете занятие, вы задаёте три вопроса. Первый: чему студент должен научиться? Второй: что он для этого будет делать? Третий: как я проверю, что он научился? Если ответы не стыкуются — задание нужно переделать.</p>
+  </section>
+
+  <!-- ЧАСТЬ 3. СВЕЛЛЕР -->
+  <section class="lr-part lr-part--3">
+    <p class="lr-part-tag">Часть третья</p>
+    <h2>Джон Свеллер и причина, по которой лекции на два часа не работают</h2>
+
+    <p>Вы когда-нибудь замечали, что после часа напряжённой лекции студенты начинают смотреть в телефон? Это не про мотивацию. Это про <strong>рабочую память</strong>.</p>
+
+    <p>Австралийский психолог Джон Свеллер в 1980-х годах разработал теорию когнитивной нагрузки. Её суть: рабочая память человека — это ресурс с жёстким ограничением. В среднем мы можем одновременно удерживать 4–7 элементов информации [Miller, 1956]. Когда элементов больше — начинается перегруз.</p>
+
+    <div class="lr-card lr-card--cyan">
+      <p class="lr-card__label lr-card__label--cyan">Свеллер различает три вида нагрузки</p>
+      <p class="lr-step lr-step--cyan"><strong>Внутренняя.</strong> Сложность самого материала. Она зависит от того, сколько элементов нужно удерживать одновременно. Эту нагрузку нельзя убрать полностью — но можно разбить материал на части.</p>
+      <p class="lr-step lr-step--cyan"><strong>Внешняя.</strong> Нагрузка, которую создаёт плохая подача: длинные слайды, текст, который дублирует речь, отвлекающие элементы. Эту нагрузку нужно убирать — она не помогает учиться.</p>
+      <p class="lr-step lr-step--cyan"><strong>Полезная.</strong> Усилия, которые действительно ведут к пониманию: когда студент связывает новое с уже известным, решает задачу, объясняет своими словами.</p>
+    </div>
+
+    <p>Что это значит для вас как для преподавателя? Ваша задача — <strong>снизить внешнюю нагрузку, управлять внутренней и создать условия для полезной</strong> [Sweller et al., 2011].</p>
+
+    <p>На практике это выглядит так. Вы не читаете 90 минут подряд. Вы разбиваете занятие на блоки по 15–20 минут, между которыми студенты что-то делают: обсуждают, решают, формулируют. Вы не дублируете текст слайда голосом — слайды содержат схемы, а объяснение идёт через речь. Вы даёте готовые примеры, чтобы студент видел образец решения, прежде чем решать сам.</p>
+
+    <p>Исследования подтверждают: когда студенты видят worked example — разобранный пример решения задачи — они тратят меньше когнитивных ресурсов на понимание и больше на собственно обучение. Этот эффект называется <strong>worked example effect</strong>, и он хорошо описан в работах Александра Ренкла [Renkl, 2014].</p>
+
+    <div class="lr-card lr-card--green">
+      <p class="lr-card__label lr-card__label--green">Практическое правило</p>
+      <p>Если вы не можете объяснить, зачем студенты слушают вас следующие 15 минут без перерыва на активность, — разбейте этот блок. Обучение — это не передача информации. Это обработка информации. А обработка требует паузы.</p>
+    </div>
+  </section>
+
+  <!-- ЧАСТЬ 4. МАЙЕР -->
+  <section class="lr-part lr-part--4">
+    <p class="lr-part-tag">Часть четвёртая</p>
+    <h2>Ричард Майер и то, как делать слайды, которые не мешают</h2>
+
+    <p>Ричард Майер — американский психолог, который почти сорок лет изучал, как люди учатся по мультимедийным материалам. Его «Кембриджский справочник по мультимедийному обучению» — это свод экспериментальных исследований, которые проверяли одни и те же гипотезы десятки раз [Mayer, 2014].</p>
+
+    <p>Майер сформулировал принципы, которые мы используем в курсе. Три из них особенно важны для проектирования занятия.</p>
+
+    <div class="lr-card lr-card--amber">
+      <p class="lr-step lr-step--amber"><strong>Принцип модальности.</strong> Люди лучше понимают, когда объяснение идёт голосом, а картинка — на экране. Если вы дублируете речь текстом на слайде, вы загружаете зрительный канал дважды. Исследования показывают: при использовании аудио-нарратива вместо текста результаты обучения улучшаются [Low &amp; Sweller, 2014].</p>
+      <p class="lr-step lr-step--amber"><strong>Принцип сегментации.</strong> Материал усваивается лучше, когда он разбит на короткие блоки, а не подан одним потоком. Студент может переварить 5-минутное объяснение, но не 45-минутную лекцию без пауз.</p>
+      <p class="lr-step lr-step--amber"><strong>Принцип персонализации.</strong> Обращение на «вы», разговорный стиль, живой голос — всё это работает лучше, чем формальный академический язык. В экспериментах Майера персонифицированный стиль улучшил результаты переноса знаний в 11 из 11 сравнений [Mayer, 2014].</p>
+    </div>
+
+    <p>Что это значит на практике? Ваши слайды должны содержать схемы, а не текст. Ваше объяснение должно идти голосом. Ваши примеры должны быть про реальные ситуации, а не про абстрактных «студентов вообще». И да — обращение на «вы» к аудитории работает лучше, чем безличное «необходимо отметить, что».</p>
+  </section>
+
+  <!-- СИНТЕЗ -->
+  <section class="lr-part lr-part--synth">
+    <p class="lr-part-tag">Синтез</p>
+    <h2>Что получается, когда четыре модели работают вместе</h2>
+
+    <p>По отдельности каждая модель отвечает на один вопрос. Вместе они образуют систему.</p>
+
+    <div class="lr-card lr-card--slate">
+      <p class="lr-step"><strong style="color: #7b1fa2;">Колб</strong> отвечает на вопрос «в какой последовательности?» — опыт → рефлексия → теория → применение.</p>
+      <p class="lr-step"><strong style="color: #1a56db;">Биггс</strong> отвечает на вопрос «что с чем должно совпадать?» — цель, активность, проверка.</p>
+      <p class="lr-step"><strong style="color: #00838f;">Свеллер</strong> отвечает на вопрос «сколько можно дать за раз?» — дозировать материал, убирать лишнее.</p>
+      <p class="lr-step"><strong style="color: #b45309;">Майер</strong> отвечает на вопрос «как подать, чтобы не мешало?» — голос + картинка, короткие блоки, живой язык.</p>
+    </div>
+
+    <p>Именно поэтому в нашем курсе страницы модуля 2 устроены определённым образом. Мы не просто «рассказываем про цикл Колба». Мы применяем его к самому модулю. Вы сначала видите проблему (как спроектировать занятие?), потом обсуждаете варианты (два пути), потом получаете теорию (адаптированный цикл), потом применяете (практическое задание).</p>
+
+    <p>Это не совпадение. Это метафора: курс устроен так же, как должно быть устроено ваше занятие. Мы не рассказываем — мы показываем.</p>
+  </section>
+
+  <!-- ПРИМЕНЕНИЕ -->
+  <section class="lr-part lr-part--apply">
+    <p class="lr-part-tag">Применение</p>
+    <h2>Что делать с этим в понедельник утром</h2>
+
+    <p>Теория бесполезна, если её нельзя применить. Поэтому вот чек-лист из шести вопросов. Задайте их себе перед следующим занятием.</p>
+
+    <div class="lr-card lr-card--green">
+      <ul class="lr-checklist">
+        <li>Какой конкретный результат должен быть у студента в конце занятия? Сформулируйте его через действие: «сможет написать», «сможет проанализировать», «сможет объяснить».</li>
+        <li>Что студенты будут делать, чтобы к этому результату прийти? Если только «слушать» — переделайте.</li>
+        <li>Как я узнаю, что результат достигнут? Это не «спрошу на экзамене», а конкретная проверка на занятии.</li>
+        <li>Есть ли в занятии место для рефлексии? Хотя бы пять минут, когда студенты обсуждают, что было непонятно.</li>
+        <li>Не перегружено ли занятие? Если вы запланировали больше, чем реально можно сделать за 80 минут, — режьте.</li>
+        <li>Работают ли слайды на результат? Если на них текст, который вы проговариваете голосом, — уберите текст. Оставьте схемы.</li>
+      </ul>
+    </div>
+
+    <p>Шесть вопросов — это не догма. Но если вы ответите на них честно, ваше занятие станет лучше. Не идеальным — просто лучше. А это и есть цель: не прыгнуть выше головы, а сделать следующий шаг.</p>
+  </section>
+
+  <!-- ФИНАЛ -->
+  <div class="lr-final">
+    <h2>Вы дошли до конца. Что теперь?</h2>
+    <p>Мы разобрали четыре модели — Колба, Биггса, Свеллера, Майера. Возможно, вы встретили некоторые из них впервые, а может быть, узнали то, что уже интуитивно делали. В любом случае цель одна: чтобы у вас была <strong>осознанная опора</strong> для проектирования занятий.</p>
+    <p>Дальше — три страницы модуля. На них вы разберёте, от чего отталкиваться, как выглядит структура занятия в адаптированном цикле Колба и как анализировать готовые сценарии. Всё это — с примерами и практическими заданиями.</p>
+    <p>Не пытайтесь запомнить модели. Просто держите в голове три вопроса: <strong>чему учу? что делают студенты? как проверю?</strong> Это уже сильно повысит качество ваших занятий.</p>
+  </div>
+
+  <!-- ИСТОЧНИКИ -->
+  <div class="lr-sources">
+    <p class="lr-sources__label">Источники, на которые опирается модуль</p>
+    <p>Bergsteiner H., Avery G. C., Neumann R. Kolb’s experiential learning model: critique from a modelling perspective // Studies in Continuing Education. 2010. Vol. 32, no. 1. P. 29–46.</p>
+    <p>Biggs J. Enhancing teaching through constructive alignment // Higher Education. 1996. Vol. 32, no. 3. P. 347–364.</p>
+    <p>Clark R. C., Mayer R. E. E-learning and the science of instruction: proven guidelines for consumers and designers of multimedia learning. 4th ed. Hoboken, NJ: Wiley, 2016.</p>
+    <p>Fowler J. Experiential learning and its facilitation // Nursing Standard. 2008. Vol. 22, no. 38. P. 55–60.</p>
+    <p>Kolb D. A. Experiential learning: experience as the source of learning and development. Englewood Cliffs, NJ: Prentice-Hall, 1984.</p>
+    <p>Low R., Sweller J. The modality principle in multimedia learning // The Cambridge handbook of multimedia learning / ed. by R. E. Mayer. 2nd ed. New York: Cambridge University Press, 2014. P. 227–242.</p>
+    <p>Mayer R. E. Introduction to multimedia learning // The Cambridge handbook of multimedia learning / ed. by R. E. Mayer. 2nd ed. New York: Cambridge University Press, 2014. P. 1–24.</p>
+    <p>Miller G. A. The magical number seven, plus or minus two: some limits on our capacity for processing information // Psychological Review. 1956. Vol. 63, no. 2. P. 81–97.</p>
+    <p>Renkl A. Toward an instructionally oriented theory of example-based learning // Cognitive Science. 2014. Vol. 38, no. 1. P. 1–37.</p>
+    <p>Sweller J., Ayres P., Kalyuga S. Cognitive load theory. New York, NY: Springer, 2011.</p>
+  </div>
+
+</article>
+</main>
+
+</body>
+</html>
